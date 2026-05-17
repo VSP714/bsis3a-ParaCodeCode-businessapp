@@ -6,6 +6,14 @@
 
 ---
 
+## 📥 Download
+
+[![Download APK](https://img.shields.io/badge/Download-Markify%20v1.0.0-blue?style=for-the-badge&logo=android)](https://github.com/NicoJohnSanLorenzo/bsis3a-ParaCodeCode-businessapp/releases/tag/v1.0.0)
+
+> Requires Android 6.0 or higher
+
+---
+
 ## ✨ Features
 
 | Feature | Description |
@@ -87,15 +95,15 @@ Stores user profile and role information.
 ## 🚀 Steps to Run
 
 1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/bsis3a-ParaCodeCode-businessapp.git
+```bash
+   git clone https://github.com/NicoJohnSanLorenzo/bsis3a-ParaCodeCode-businessapp.git
    cd bsis3a-ParaCodeCode-businessapp
-   ```
+```
 
 2. **Install Flutter dependencies**
-   ```bash
+```bash
    flutter pub get
-   ```
+```
 
 3. **Set up Firebase**
    - Go to [Firebase Console](https://console.firebase.google.com/) and create a project
@@ -105,14 +113,13 @@ Stores user profile and role information.
 4. **Configure your API key**
    - Create a `.env` file in the project root
    - Add your Groq API key:
-     ```
-     GROQ_API_KEY=your_groq_api_key_here
-     ```
+
+GROQ_API_KEY=your_groq_api_key_here
 
 5. **Run the app**
-   ```bash
+```bash
    flutter run
-   ```
+```
 
 > **Requirements:** Flutter SDK 3.x+, Dart 3.x+, Android Studio or Xcode, Firebase project configured
 
