@@ -1,43 +1,86 @@
-# ParaCodeCode Business App
+# Markify — ParaCodeCode Business App
 
-## 📱 Business App Idea
+## 📱 About the App
 
-ParaCodeCode Business App is a mobile application built with Flutter and Firebase that helps small businesses manage customer check-ins and process orders in one place. It allows staff to log customer arrivals and track order transactions efficiently, providing a simple and organized way to monitor daily business activity in real time.
+**Markify** is a mobile application built with Flutter and Firebase that helps small businesses manage inventory and customer orders in one place. Staff can log and track inventory stock levels, manage customer orders, and receive real-time stock alerts — all from a clean, role-aware interface. Admins get additional controls to manage user roles and permissions across the team.
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| 🔐 Authentication | Email/password login and registration via Firebase Auth |
+| 📊 Dashboard | Real-time overview of order statuses and inventory alerts |
+| 🛒 Customer Orders | View, search, filter, and add customer orders |
+| 📦 Inventory | Track product stock levels with Low Stock / Out-of-Stock alerts |
+| 🤖 AI Assistant | Chat-based assistant (powered by Groq API) for business queries |
+| 👥 User Management | Admin-only screen to assign and change user roles |
+| 🔔 Notifications | Bell icon with live badge count for stock alert items |
+
+---
+
+## 🗂️ App Screens
+
+| Screen | File |
+|---|---|
+| Landing (Welcome) | `landing_screen.dart` |
+| Login | `login_screen.dart` |
+| Register | `register_screen.dart` |
+| Dashboard | `dashboard_screen.dart` |
+| Customer Orders | `customer_screen.dart` |
+| Add Customer Order | `add_customer_order_screen.dart` |
+| Inventory (Log List) | `log_list_screen.dart` |
+| Add Inventory Item | `create_checkin_screen.dart` |
+| AI Assistant | `ai_assistant_screen.dart` |
+| Manage Users (Admin) | `admin_users_screen.dart` |
 
 ---
 
 ## 🗄️ Firestore Collections
 
-### 1. `Check-In Logs`
-Tracks customer check-in activity and visit records.
-
-| Field | Type | Description |
-|---|---|---|
-| `checkInId` | String | Unique ID for the check-in record |
-| `customerName` | String | Full name of the customer |
-| `contactNumber` | String | Customer's contact number |
-| `checkInTime` | Timestamp | Date and time of check-in |
-| `checkOutTime` | Timestamp | Date and time of check-out |
-| `purpose` | String | Reason or purpose of visit |
-| `status` | String | Current status (e.g., Checked In, Checked Out) |
-| `notes` | String | Optional remarks from staff |
-
----
-
-### 2. `Customer Orders`
+### 1. `customer_orders`
 Stores order details placed by customers.
 
 | Field | Type | Description |
 |---|---|---|
-| `orderId` | String | Unique ID for the order |
-| `customerName` | String | Name of the customer who placed the order |
-| `contactNumber` | String | Customer's contact number |
-| `orderItems` | Array | List of items ordered |
-| `totalAmount` | Number | Total price of the order |
-| `orderDate` | Timestamp | Date and time the order was placed |
-| `paymentStatus` | String | Payment status (e.g., Paid, Pending, Cancelled) |
-| `deliveryStatus` | String | Delivery/fulfillment status |
-| `notes` | String | Special instructions or remarks |
+| `customerName` | String | Name of the customer |
+| `address` | String | Delivery address |
+| `phone` | String | Contact number |
+| `product` | String | Product ordered |
+| `quantity` | Number | Quantity ordered |
+| `orderStatus` | String | `Processing`, `Shipped`, or `Delivered` |
+| `dateCreated` | Timestamp | Date and time the order was placed |
+
+---
+
+### 2. `checkin_logs`
+Tracks inventory items and their stock levels.
+
+| Field | Type | Description |
+|---|---|---|
+| `productName` | String | Name of the product |
+| `stockStatus` | String | `In-stock`, `Low stock`, or `Out-of-stock` |
+| `supplierName` | String | Name of the supplier |
+| `note` | String | Optional staff notes |
+| `createdBy` | String | Staff member who logged the item |
+| `groupName` | String | Product group or brand label |
+| `businessType` | String | Type of business/category |
+| `latitude` | Number | GPS latitude at time of log |
+| `longitude` | Number | GPS longitude at time of log |
+| `imageUrl` | String | Optional proof/photo URL |
+| `createdAt` | Timestamp | Date and time the record was created |
+
+---
+
+### 3. `users`
+Stores user profile and role information.
+
+| Field | Type | Description |
+|---|---|---|
+| `email` | String | User's email address |
+| `role` | String | `admin` or `staff` |
+| `createdAt` | Timestamp | Account creation date |
 
 ---
 
@@ -56,15 +99,42 @@ Stores order details placed by customers.
 
 3. **Set up Firebase**
    - Go to [Firebase Console](https://console.firebase.google.com/) and create a project
-   - Add your Android/iOS app and download the `google-services.json` (Android) or `GoogleService-Info.plist` (iOS)
+   - Add your Android/iOS app and download `google-services.json` (Android) or `GoogleService-Info.plist` (iOS)
    - Place the config file in the appropriate directory (`android/app/` or `ios/Runner/`)
 
-4. **Run the app**
+4. **Configure your API key**
+   - Create a `.env` file in the project root
+   - Add your Groq API key:
+     ```
+     GROQ_API_KEY=your_groq_api_key_here
+     ```
+
+5. **Run the app**
    ```bash
    flutter run
    ```
 
 > **Requirements:** Flutter SDK 3.x+, Dart 3.x+, Android Studio or Xcode, Firebase project configured
+
+---
+
+## 📦 Key Dependencies
+
+| Package | Purpose |
+|---|---|
+| `firebase_core` | Firebase initialization |
+| `firebase_auth` | User authentication |
+| `cloud_firestore` | Realtime database |
+| `flutter_dotenv` | Environment variable management |
+| `http` | Groq AI API calls |
+| `geolocator` | GPS coordinates for inventory logs |
+| `image_picker` | Camera/gallery photo upload |
+
+---
+
+## 👥 Team
+
+**BSIS 3A — ParaCodeCode**
 
 ---
 
@@ -74,17 +144,11 @@ Stores order details placed by customers.
 
 | Screen | Preview |
 |---|---|
-| Home / Dashboard | ![Home Screen](screenshots/home_screen.png) |
-| Check-In Logs List | ![Check-In Logs](screenshots/checkin_logs.png) |
-| Add Check-In Form | ![Add Check-In](screenshots/add_checkin.png) |
-| Customer Orders List | ![Customer Orders](screenshots/customer_orders.png) |
-| Add Order Form | ![Add Order](screenshots/add_order.png) |
-| Order Details | ![Order Details](screenshots/order_details.png) |
-
----
-
-## 👥 Team
-
-**BSIS 3A — ParaCodeCode**
-
----
+| Landing Screen | ![Landing](screenshots/landing_screen.png) |
+| Dashboard | ![Dashboard](screenshots/dashboard_screen.png) |
+| Customer Orders | ![Customer Orders](screenshots/customer_orders.png) |
+| Add Order | ![Add Order](screenshots/add_order.png) |
+| Inventory List | ![Inventory](screenshots/inventory_list.png) |
+| Add Inventory Item | ![Add Item](screenshots/add_inventory.png) |
+| AI Assistant | ![AI Assistant](screenshots/ai_assistant.png) |
+| Manage Users | ![Manage Users](screenshots/manage_users.png) |
