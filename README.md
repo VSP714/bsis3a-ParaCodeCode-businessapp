@@ -196,7 +196,3 @@ flutter run
 ## 👥 Team
 
 **BSIS 3A — ParaCodeCode**
-
----
-
-*© 2026 Markify. All rights reserved.*
